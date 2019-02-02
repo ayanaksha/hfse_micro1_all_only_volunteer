@@ -34,10 +34,10 @@ public class SalesTransaction implements Serializable {
 	private String eventType;
 	
 	@Column(name = "event_time")
-	private BigDecimal eventTime;
+	private String eventTime;
 	
 	@Column(name = "event_location")
-	private BigDecimal eventLocation;
+	private String eventLocation;
 
 	@Column(name = "status")
 	private String status;
