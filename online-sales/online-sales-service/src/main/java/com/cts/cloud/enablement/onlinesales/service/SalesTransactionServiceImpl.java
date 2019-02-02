@@ -68,7 +68,7 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 		for(SalesTransaction eachRecord : salesTransactionList) {
 			//fetch user id by invoking DB with username
 		    eachRecord.setRequestedBy(eachRecord.getRequestedBy());
-			eachRecord.setApprovedDate(new Date().toString());
+			//eachRecord.setApprovedDate(new Date().toString());
 		}
 		salesTransactionRepository.saveAll(salesTransactionList);
 		return retrieveRelationshipManagerTransactions(approverDetails.getUserEmailId());
