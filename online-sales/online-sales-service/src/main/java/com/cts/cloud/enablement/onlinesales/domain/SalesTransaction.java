@@ -45,6 +45,9 @@ public class SalesTransaction implements Serializable {
 	@Column(name = "requested_by")
 	private String requestedBy;
 	
+	@Column(name = "approver")
+	private String approver;
+	
 	@Column(name = "created_date")
 	private String createdDate;
 	
@@ -73,7 +76,7 @@ public class SalesTransaction implements Serializable {
 	 */
 	public SalesTransaction(Long id, String eventType, String eventTime, String eventLocation,
 			String status, String requestedBy, String createdDate, 
-			String rmEmailId) {
+			String rmEmailId, String approver) {
 		super();
 		this.id = id;
 		this.eventType = eventType;
@@ -81,6 +84,7 @@ public class SalesTransaction implements Serializable {
 		this.eventLocation = eventLocation;
 		this.status = status;
 		this.requestedBy = requestedBy;
+		this.approver = approver;
 		this.createdDate = createdDate;
 		this.rmEmailId = rmEmailId;
 	}
@@ -156,6 +160,17 @@ public class SalesTransaction implements Serializable {
 	 */
 	public void setRequestedBy(String requestedBy) {
 		this.requestedBy = requestedBy;
+	}
+	
+	public String getApprover() {
+		return approver;
+	}
+
+	/**
+	 * @param requested_by the requested_by to set
+	 */
+	public void setApprover(String approver) {
+		this.approver = approver;
 	}
 
 		/**
