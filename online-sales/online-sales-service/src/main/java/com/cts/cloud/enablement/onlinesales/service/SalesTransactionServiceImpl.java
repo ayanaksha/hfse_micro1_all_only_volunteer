@@ -26,58 +26,89 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 	private transient SalesUserRepository salesUserRepository;
 	
 	@Override
-	public List<SalesTransaction> retrieveTransactionsByUser(String username) {
-		SalesUser salesUser = salesUserRepository.findByUsername(username);
-		return salesTransactionRepository.findByRequestedByOrderByStatusAsc(salesUser.getUserEmailId());
+	public List<SalesTransaction> retrieveTransactionsByUser(Long id) {
+		SalesUser salesUser = salesUserRepository.findById(id);
+		return salesTransactionRepository.findByEmpID(salesUser.getEmpid());
 	}
 
 	@Override
-	public List<SalesTransaction> createTransaction(SalesTransaction salesTransaction) {
+	public List<SalesTransaction> retrieveTransactionsByProjID(Long projID) {
+		return salesTransactionRepository.findByProjID(projID);
+	}
+	
+	@Override
+	public List<SalesTransaction> retrievePocTransactions(Long pocID) {
+		return salesTransactionRepository.findByPocIDOrderByStatusAsc(pocID);
+	}
+	
+	@Override
+	public List<SalesTransaction> retrieveEventTransactions(Long eventID) {
+		return salesTransactionRepository.findByEventID(eventID);
+	}
+	
+	@Override
+	public List<SalesTransaction> createTransaction(SalesTransaction salesTransaction) throws exception{
+		if(salesTransactionRepository.findByEmpIDAndEventID(salesTransaction.getEmpID(),salesTransaction.getEventID()).size() == 1) {
+			throw new Exception("Already Registered for the current event");
+		}
+		
+		if(salesTransaction.getEventTime() == salesTransactionRepository.findByEmpIDAndEventTime(salesTransaction.getEmpID(),salesTransaction.getEventTime())) {
+			throw new Exception("Already Registered for an event on that date");
+		}
+		
+		SalesUser salesUser = salesUserRepository.findById(empID);
 		salesTransaction.setStatus("OPEN");
+		salesTransaction.setEmpProjID(salesUser.getProjId());
+		salesTransaction.setEmpEmailID(salesUser.getEmailId());
 		salesTransaction.setCreatedDate(new Date().toString());
 		salesTransactionRepository.save(salesTransaction);
-		return salesTransactionRepository.findByRequestedBy(salesTransaction.getRequestedBy());
+		return salesTransactionRepository.findByEmpID(salesTransaction.getEmpID());
 	}
 
+//	@Override
+//	public List<SalesTransaction> retrievePocTransactions(Long pocID) {
+//		SalesUser currentRelationManager = salesUserRepository.findByUserEmailId(userEmailId);
+//		List<SalesUser> salesUser = salesUserRepository.findByRoleAndLocation("user", currentRelationManager.getLocation());
+//		
+//		List<String> listOfUserEmailIds = salesUser.stream().map(SalesUser::getUserEmailId).map(Object::toString).collect(Collectors.toList());
+//		
+//		List<SalesTransaction> salesRelationshipManagerTransactionList = salesTransactionRepository.findByRequestedByInAndStatus(listOfUserEmailIds, "OPEN");
+//		
+//		salesRelationshipManagerTransactionList.forEach( salesRM -> {
+//			salesUser.forEach( sales -> {
+//				if(salesRM.getRequestedBy().equals(sales.getUserEmailId())) {
+//					salesRM.setRequestedBy(sales.getUserEmailId());
+//				}
+//			});
+//		});		
+//		return salesRelationshipManagerTransactionList;
+//	}
+//	
+//	@Override
+//	public List<SalesTransaction> updateTransaction(List<SalesTransaction> salesTransactionList) throws Exception {
+//		if(salesTransactionList.size() < 1) {
+//			throw new Exception("No data");
+//		}
+//		final String user = salesTransactionList.get(0).getApprover();
+//		SalesUser approverDetails = salesUserRepository.findByUsername(user);
+//		for(SalesTransaction eachRecord : salesTransactionList) {
+//			//fetch user id by invoking DB with username
+//		    eachRecord.setRequestedBy(eachRecord.getRequestedBy());
+//			eachRecord.setApprovedDate(new Date().toString());
+//		}
+//		salesTransactionRepository.saveAll(salesTransactionList);
+//		return retrieveRelationshipManagerTransactions(approverDetails.getUserEmailId());
+//	}
+//
+//	
 	@Override
-	public List<SalesTransaction> retrieveRelationshipManagerTransactions(String userEmailId) {
-		SalesUser currentRelationManager = salesUserRepository.findByUserEmailId(userEmailId);
-		List<SalesUser> salesUser = salesUserRepository.findByRoleAndLocation("user", currentRelationManager.getLocation());
+	public List<SalesTransaction> updateTransactionStatus(Long eventID) {
+		SalesTransaction salesTransaction = salesTransactionRepository.findByeventID(eventID);
+		salesTransaction.setStatus('cancelled');
 		
-		List<String> listOfUserEmailIds = salesUser.stream().map(SalesUser::getUserEmailId).map(Object::toString).collect(Collectors.toList());
-		
-		List<SalesTransaction> salesRelationshipManagerTransactionList = salesTransactionRepository.findByRequestedByInAndStatus(listOfUserEmailIds, "OPEN");
-		
-		salesRelationshipManagerTransactionList.forEach( salesRM -> {
-			salesUser.forEach( sales -> {
-				if(salesRM.getRequestedBy().equals(sales.getUserEmailId())) {
-					salesRM.setRequestedBy(sales.getUserEmailId());
-				}
-			});
-		});		
-		return salesRelationshipManagerTransactionList;
-	}
-
-	@Override
-	public List<SalesTransaction> updateTransaction(List<SalesTransaction> salesTransactionList) throws Exception {
-		if(salesTransactionList.size() < 1) {
-			throw new Exception("No data");
-		}
-		final String user = salesTransactionList.get(0).getApprover();
-		SalesUser approverDetails = salesUserRepository.findByUsername(user);
-		for(SalesTransaction eachRecord : salesTransactionList) {
-			//fetch user id by invoking DB with username
-		    eachRecord.setRequestedBy(eachRecord.getRequestedBy());
-			//eachRecord.setApprovedDate(new Date().toString());
-		}
-		salesTransactionRepository.saveAll(salesTransactionList);
-		return retrieveRelationshipManagerTransactions(approverDetails.getUserEmailId());
+		salesTransactionRepository.save(salesTransaction);
+		return salesTransactionRepository.findByeventID(eventID);
 	}
 
 	
-	@Override
-	public List<SalesTransaction> updateTransaction(SalesTransaction salesTransaction) {
-		salesTransactionRepository.save(salesTransaction);
-		return salesTransactionRepository.findByRequestedByOrderByStatusAsc(salesTransaction.getRequestedBy());
-	}
 }

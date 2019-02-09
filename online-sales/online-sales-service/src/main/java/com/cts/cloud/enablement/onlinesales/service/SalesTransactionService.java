@@ -10,13 +10,16 @@ import com.cts.cloud.enablement.onlinesales.domain.SalesTransaction;
  */
 public interface SalesTransactionService {
 	
-	List<SalesTransaction> retrieveTransactionsByUser(String username);
+	List<SalesTransaction> retrieveTransactionsByUser(Long empID);
 	
-	List<SalesTransaction> retrieveRelationshipManagerTransactions(String username);
+	List<SalesTransaction> retrieveTransactionsByProjID(Long projID);
+	
+	List<SalesTransaction> retrievePocTransactions(Long pocID);
+	
+	List<SalesTransaction> retrieveEventTransactions(Long eventID);
 
-	List<SalesTransaction> createTransaction(SalesTransaction salesTransaction);
+	List<SalesTransaction> createTransaction(SalesTransaction salesTransaction) throws Exception;
 	
-	List<SalesTransaction> updateTransaction(List<SalesTransaction> salesTransaction) throws Exception;
+	List<SalesTransaction> updateTransactionStatus(Long eventID);
 	
-	List<SalesTransaction> updateTransaction(SalesTransaction salesTransaction);
 }

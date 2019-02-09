@@ -35,6 +35,9 @@ public class SalesController {
 	SalesTransactionService salesTransactionService;
 	
 	@Autowired
+	EventService eventService;
+	
+	@Autowired
 	private SecurityTokenGenerator tokenGenerator;
 	
 	@GetMapping("/testApi")
@@ -50,13 +53,13 @@ public class SalesController {
 	 * @return
 	 */
 	@PostMapping(path = "/login")
-	public ResponseEntity<?> retrieveUserByUsername(@RequestBody final SalesUser user, final HttpServletRequest request,
+	public ResponseEntity<?> retrieveUserById(@RequestBody final SalesUser user, final HttpServletRequest request,
 			final HttpServletResponse response) {
 		ResponseEntity<?> responseEntity;
 		Map<String, Object> map = new HashMap<String, Object>(); 
 		SalesUser thisUser = null;
 		try {
-			thisUser = salesUserService.retrieveUserByUserEmailIdAndPassword(user);
+			thisUser = salesUserService.retrieveUserByEmpIDAndPassword(user);
 		} catch (Exception e) {
 			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
@@ -102,7 +105,7 @@ public class SalesController {
 		ResponseEntity<?> responseEntity;
 		List<SalesTransaction> salesTransactionList = null;
 		try {
-			salesTransactionList = salesTransactionService.retrieveTransactionsByUser(user.getUsername());
+			salesTransactionList = salesTransactionService.retrieveTransactionsByUser(user.getId());
 		} catch (Exception e) {
 			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
@@ -116,18 +119,18 @@ public class SalesController {
 	 * @param response
 	 * @return
 	 */
-	@PostMapping(path = "/online-sales-service/retrieveRMTransactions")
-	public @ResponseBody ResponseEntity<?> retrieveRelationshipManagerTransactionDetails(@RequestBody final SalesUser user, final HttpServletRequest request,
+	@PostMapping(path = "/online-sales-service/retrievePOCTransactions")
+	public @ResponseBody ResponseEntity<?> retrievePOCTransactionDetails(@RequestBody final SalesUser user, final HttpServletRequest request,
 			final HttpServletResponse response) {
 		ResponseEntity<?> responseEntity;
-		List<SalesTransaction> salesRelationshipManagerTransactionList = null;
+		List<SalesTransaction> salesPOCTransactionList = null;
 		try {
-			salesRelationshipManagerTransactionList = salesTransactionService.retrieveRelationshipManagerTransactions(user.getUserEmailId());
+			salesPOCTransactionList = salesTransactionService.retrievePocTransactions(user.getPocId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<List<SalesTransaction>>(salesRelationshipManagerTransactionList, HttpStatus.OK);
+		return new ResponseEntity<List<SalesTransaction>>(salesPOCTransactionList, HttpStatus.OK);
 	}
 	
 	/**
@@ -144,17 +147,17 @@ public class SalesController {
 		List<SalesTransaction> salesTransactionList = null;
 		SalesUser requestedSalesUser = new SalesUser();
 		try {
-			requestedSalesUser.setUserEmailId(salesTransactionDetails.getRequestedBy());
-			requestedSalesUser = salesUserService.retrieveUserByEmailId(requestedSalesUser);
+			requestedSalesUser.setEmpID(salesTransactionDetails.getPocID());
+			requestedSalesUser = salesUserService.retrieveUserByEmpID(requestedSalesUser);
 			if(requestedSalesUser == null) {
 				throw new Exception("Couldn't find user");
 			}
 
-			Optional<SalesUser> relationManager = salesUserService.retrieveRMByUser(requestedSalesUser).stream().findFirst();
-			relationManager.orElseThrow(() -> new Exception("Couldn't find RM with user email id"));
+//			Optional<SalesUser> relationManager = salesUserService.retrieveRMByUser(requestedSalesUser).stream().findFirst();
+//			relationManager.orElseThrow(() -> new Exception("Couldn't find RM with user email id"));
 			
-			salesTransactionDetails.setRequestedBy(requestedSalesUser.getUserEmailId());
-			salesTransactionDetails.setRmEmailId(relationManager.get().getUserEmailId());
+//			salesTransactionDetails.setRequestedBy(requestedSalesUser.getUserEmailId());
+//			salesTransactionDetails.setRmEmailId(relationManager.get().getUserEmailId());
 			salesTransactionList = salesTransactionService.createTransaction(salesTransactionDetails);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,7 +166,15 @@ public class SalesController {
 		return new ResponseEntity<List<SalesTransaction>>(salesTransactionList, HttpStatus.OK);
 	}
 	
-	
+	@PostMapping(path = "/online-sales-service/createEvent")
+	public @ResponseBody ResponseEntity<?> createEventDetails(@RequestBody final List<Event> eventDetails, final HttpServletRequest request,
+			final HttpServletResponse response) {
+		ResponseEntity<?> responseEntity;
+		List<Event> EventList = null; 
+		eventList = eventService.createEvents(eventDetails); 
+		return new ResponseEntity<List<Event>>(eventList, HttpStatus.OK);
+	}
+		
 	/**
 	 * method to save approval of a transaction
 	 * @param salesTransactionDetails
@@ -171,32 +182,32 @@ public class SalesController {
 	 * @param response
 	 * @return
 	 */
-	@PostMapping(path = "/online-sales-service/submitTransactionApproval")
-	public @ResponseBody ResponseEntity<?> submitTransactionApproval(@RequestBody final List<SalesTransaction> salesTransactionDetails, final HttpServletRequest request,
-			final HttpServletResponse response) {
-		ResponseEntity<?> responseEntity;
-		List<SalesTransaction> salesTransactionList = null; 
-		try {
-			salesTransactionList = salesTransactionService.updateTransaction(salesTransactionDetails);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		return new ResponseEntity<List<SalesTransaction>>(salesTransactionList, HttpStatus.OK);
-	}
-	
-	/**
-	 * method to submit payment for a transaction
-	 * @param salesTransactionDetails
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@PostMapping(path = "/online-sales-service/submitPaidTransaction")
-	public @ResponseBody ResponseEntity<?> submitPaidTransaction(@RequestBody final SalesTransaction salesTransactionDetails, final HttpServletRequest request,
-			final HttpServletResponse response) {
-		ResponseEntity<?> responseEntity;
-		List<SalesTransaction> salesTransactionList = null; 
-		salesTransactionList = salesTransactionService.updateTransaction(salesTransactionDetails); 
-		return new ResponseEntity<List<SalesTransaction>>(salesTransactionList, HttpStatus.OK);
-	}
+//	@PostMapping(path = "/online-sales-service/submitTransactionApproval")
+//	public @ResponseBody ResponseEntity<?> submitTransactionApproval(@RequestBody final List<SalesTransaction> salesTransactionDetails, final HttpServletRequest request,
+//			final HttpServletResponse response) {
+//		ResponseEntity<?> responseEntity;
+//		List<SalesTransaction> salesTransactionList = null; 
+//		try {
+//			salesTransactionList = salesTransactionService.updateTransaction(salesTransactionDetails);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} 
+//		return new ResponseEntity<List<SalesTransaction>>(salesTransactionList, HttpStatus.OK);
+//	}
+//	
+//	/**
+//	 * method to submit payment for a transaction
+//	 * @param salesTransactionDetails
+//	 * @param request
+//	 * @param response
+//	 * @return
+//	 */
+//	@PostMapping(path = "/online-sales-service/submitPaidTransaction")
+//	public @ResponseBody ResponseEntity<?> submitPaidTransaction(@RequestBody final SalesTransaction salesTransactionDetails, final HttpServletRequest request,
+//			final HttpServletResponse response) {
+//		ResponseEntity<?> responseEntity;
+//		List<SalesTransaction> salesTransactionList = null; 
+//		salesTransactionList = salesTransactionService.updateTransaction(salesTransactionDetails); 
+//		return new ResponseEntity<List<SalesTransaction>>(salesTransactionList, HttpStatus.OK);
+//	}
 }

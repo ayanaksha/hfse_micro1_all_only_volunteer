@@ -10,15 +10,18 @@ import com.cts.cloud.enablement.onlinesales.domain.SalesUser;
  */
 public interface SalesUserService {
 
-	SalesUser retrieveUserByUsername(SalesUser user);
+	SalesUser retrieveUserByEmpID(SalesUser user);
 	
 	SalesUser retrieveUserByEmailId(SalesUser user);
 	
-	SalesUser retrieveUserByUsernameAndPassword(SalesUser user);
+	SalesUser retrieveUserByEmpIDAndPassword(SalesUser user);
 	
-	SalesUser retrieveUserByUserEmailIdAndPassword(SalesUser user);
+	SalesUser retrieveUserByEmpEmailIdAndPassword(SalesUser user);
 	
 	SalesUser createNewUser(SalesUser user);
 	
-	List<SalesUser> retrieveRMByUser(SalesUser user);
+	SalesUser updateUserRole(SalesUser user);
+	
+	List<SalesUser> retrieveEmpByProj(SalesUser user);
+	
 }

@@ -19,8 +19,8 @@ public class SalesUserServiceImpl implements SalesUserService {
 	SalesUserRepository salesUserRepository;
 
 	@Override
-	public SalesUser retrieveUserByUsername(SalesUser user) {
-		return salesUserRepository.findByUsername(user.getUsername());
+	public SalesUser retrieveUserByEmpID(SalesUser user) {
+		return salesUserRepository.findByEmpID(user.getEmpID());
 	}
 	
 	@Override
@@ -29,33 +29,49 @@ public class SalesUserServiceImpl implements SalesUserService {
 	}
 	
 	@Override
-	public SalesUser retrieveUserByUsernameAndPassword(SalesUser user) {
-		return salesUserRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+	public SalesUser retrieveUserByEmpIDAndPassword(SalesUser user) {
+		return salesUserRepository.findByEmpIDAndPassword(user.getEmpID(), user.getPassword());
 	}
 
 	@Override
 	public SalesUser createNewUser(SalesUser user) {
-		SalesUser existingUser = salesUserRepository.findByUsername(user.getUsername());
+		SalesUser existingUser = salesUserRepository.findByEmpID(user.getEmpID());
 		SalesUser newUser = new SalesUser();
 		if(existingUser == null) {
-			newUser.setUsername(user.getUsername());
+			newUser.setEmpID(user.getEmpID());
 			newUser.setPassword(user.getPassword());
+			newUser.setEmpName(user.getEmpName());
 			newUser.setUserEmailId(user.getUserEmailId());
 			newUser.setPhone(user.getPhone());
+			newUser.setProjID(user.getProjID());
+			newUser.setProjName(user.getProjName());
 			newUser.setLocation(user.getLocation());
-			newUser.setRole("user");
+			newUser.setRole(user.getRole());
 		}
 		salesUserRepository.save(newUser);
 		return newUser;
 	}
 
+	
+	@Override
+	public SalesUser updateUserRole(SalesUser user) {
+		SalesUser existingUser = salesUserRepository.findByEmpID(user.getEmpID());
+		
+		existingUser.setRole(user.getRole());
+		
+		salesUserRepository.save(existingUser);
+		return existingUser;
+	}
+	
 	@Override
 	public SalesUser retrieveUserByUserEmailIdAndPassword(SalesUser user) {
 		return salesUserRepository.findByUserEmailIdAndPassword(user.getUserEmailId(), user.getPassword());
 	}
 
 	@Override
-	public List<SalesUser> retrieveRMByUser(SalesUser requestUser) {
-		return salesUserRepository.findByRoleAndLocation("relationmanager", requestUser.getLocation());
+	public List<SalesUser> retrieveEmpByProj(SalesUser requestUser) {
+		return salesUserRepository.findByProjID(requestUser.getProjID());
 	}
+	
+	
 }

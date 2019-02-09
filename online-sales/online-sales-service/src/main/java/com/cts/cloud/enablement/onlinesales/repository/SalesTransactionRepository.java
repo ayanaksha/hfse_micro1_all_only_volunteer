@@ -10,15 +10,25 @@ import com.cts.cloud.enablement.onlinesales.domain.SalesTransaction;
  */
 public interface SalesTransactionRepository extends JpaRepository<SalesTransaction, Long> {
 	
-	List<SalesTransaction> findByRequestedByOrderByStatusAsc(String id);
+	List<SalesTransaction> findByPocIDOrderByStatusAsc(Long pocID);
 	
-	List<SalesTransaction> findByRequestedByAndStatus(String id, String status);
+	List<SalesTransaction> findByEmpIDAndStatus(Long empID, String status);
 	
-	List<SalesTransaction> findByRequestedByIn(List<String> userList);
+	SalesTransaction findByEmpIDAndEventID(Long empID, Long eventID);
 	
-	List<SalesTransaction> findByRequestedBy(String requestedBy);
+	SalesTransaction findByEmpIDAndEventTime(Long empID, String eventTime);
 	
-	List<SalesTransaction> findByRequestedByInAndStatus(List<String> userList, String status);
+	List<SalesTransaction> findByEmpID(Long empID);
+	
+	List<SalesTransaction> findByProjID(Long ProjID);
+	
+	List<SalesTransaction> findByEmpIDIn(List<Long> userList);
+	
+	List<SalesTransaction> findByPocIDInAndStatus(List<Long> userList, String status);
+	
+	List<SalesTransaction> findByEventIDIn(List<Long> eventList);
+	
+	List<SalesTransaction> findByEventID(Long eventID);
 	
 	SalesTransaction findById(int id);
 }
