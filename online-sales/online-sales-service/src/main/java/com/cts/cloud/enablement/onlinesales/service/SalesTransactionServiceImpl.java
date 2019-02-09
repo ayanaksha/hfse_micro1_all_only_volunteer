@@ -26,9 +26,9 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 	private transient SalesUserRepository salesUserRepository;
 	
 	@Override
-	public List<SalesTransaction> retrieveTransactionsByUser(Long id) {
-		SalesUser salesUser = salesUserRepository.findById(id);
-		return salesTransactionRepository.findByEmpID(salesUser.getEmpid());
+	public List<SalesTransaction> retrieveTransactionsByUser(Long empID) {
+		SalesUser salesUser = salesUserRepository.findByEmpId(empID);
+		return salesTransactionRepository.findByEmpID(salesUser.getEmpI());
 	}
 
 	@Override

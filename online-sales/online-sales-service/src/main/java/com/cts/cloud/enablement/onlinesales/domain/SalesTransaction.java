@@ -130,7 +130,7 @@ public class SalesTransaction implements Serializable {
 	}
 
 	public Long getEmpProjID() {
-		return empProjID;
+		return empProjId;
 	}
 
 	public void setEmpProjID(Long empProjID) {

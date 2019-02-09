@@ -18,7 +18,7 @@ public interface SalesTransactionService {
 	
 	List<SalesTransaction> retrieveEventTransactions(Long eventID);
 
-	List<SalesTransaction> createTransaction(SalesTransaction salesTransaction) throws Exception;
+	SalesTransaction createTransaction(SalesTransaction salesTransaction) throws Exception;
 	
 	List<SalesTransaction> updateTransactionStatus(Long eventID);
 	

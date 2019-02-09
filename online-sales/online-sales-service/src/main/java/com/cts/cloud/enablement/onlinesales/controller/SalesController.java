@@ -149,10 +149,10 @@ public class SalesController {
 		List<SalesTransaction> salesTransactionList = null;
 		SalesUser requestedSalesUser = new SalesUser();
 		try {
-			requestedSalesUser.setEmpId(salesTransactionDetails.getPocID());
+			requestedSalesUser.setEmpid(salesTransactionDetails.getPocID());
 			requestedSalesUser = salesUserService.retrieveUserByEmpID(requestedSalesUser);
 			if(requestedSalesUser == null) {
-				throw new Exception("Couldn't find user");
+				throw new Exception("Couldn't find poc");
 			}
 
 //			Optional<SalesUser> relationManager = salesUserService.retrieveRMByUser(requestedSalesUser).stream().findFirst();
