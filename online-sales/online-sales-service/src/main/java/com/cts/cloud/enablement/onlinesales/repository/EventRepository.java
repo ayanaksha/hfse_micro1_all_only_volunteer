@@ -3,7 +3,7 @@ package com.cts.cloud.enablement.onlinesales.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.cts.cloud.enablement.onlinesales.domain.SalesUser;
+import com.cts.cloud.enablement.onlinesales.domain.Event;
 
 /**
  * @author 547991

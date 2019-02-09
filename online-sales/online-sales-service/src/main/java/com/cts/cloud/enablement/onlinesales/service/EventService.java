@@ -2,7 +2,7 @@ package com.cts.cloud.enablement.onlinesales.service;
 
 import java.util.List;
 
-import com.cts.cloud.enablement.onlinesales.domain.SalesTransaction;
+import com.cts.cloud.enablement.onlinesales.domain.Event;
 
 /**
  * @author 547991
