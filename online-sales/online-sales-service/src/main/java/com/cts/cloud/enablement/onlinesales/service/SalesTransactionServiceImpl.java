@@ -67,8 +67,8 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 	
 	@Override
 	public List<SalesTransaction> updateTransactionStatus(Long eventID) {
-		SalesTransaction salesTransaction = salesTransactionRepository.findByeventID(eventID);
-		salesTransaction.setStatus('cancelled');
+		SalesTransaction salesTransaction = salesTransactionRepository.findByEventID(eventID);
+		salesTransaction.setStatus("cancelled");
 		salesTransactionRepository.save(salesTransaction);
 		return salesTransactionRepository.findByeventID(eventID);
 	}
