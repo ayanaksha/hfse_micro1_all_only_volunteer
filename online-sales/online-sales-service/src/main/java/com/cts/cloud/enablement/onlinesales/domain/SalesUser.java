@@ -167,4 +167,4 @@ public class SalesUser implements Serializable {
 			this.location = location;
 		}
 
-		
+}

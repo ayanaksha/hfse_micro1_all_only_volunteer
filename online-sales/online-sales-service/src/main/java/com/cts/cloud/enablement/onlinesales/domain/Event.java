@@ -164,4 +164,4 @@ public class Event implements Serializable {
 			this.livesTouched = livesTouched;
 		}
 
-		
+}

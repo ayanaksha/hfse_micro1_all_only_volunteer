@@ -184,3 +184,4 @@ public class SalesTransaction implements Serializable {
 		this.empEmailId = empEmailId;
 	}
 
+}
