@@ -127,7 +127,7 @@ public class SalesController {
 		ResponseEntity<?> responseEntity;
 		List<SalesTransaction> salesPOCTransactionList = null;
 		try {
-			salesPOCTransactionList = salesTransactionService.retrievePocTransactions(user.getPocId());
+			salesPOCTransactionList = salesTransactionService.retrievePocTransactions(user.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -149,7 +149,7 @@ public class SalesController {
 		List<SalesTransaction> salesTransactionList = null;
 		SalesUser requestedSalesUser = new SalesUser();
 		try {
-			requestedSalesUser.setEmpID(salesTransactionDetails.getPocID());
+			requestedSalesUser.setEmpId(salesTransactionDetails.getPocID());
 			requestedSalesUser = salesUserService.retrieveUserByEmpID(requestedSalesUser);
 			if(requestedSalesUser == null) {
 				throw new Exception("Couldn't find user");
@@ -172,7 +172,7 @@ public class SalesController {
 	public @ResponseBody ResponseEntity<?> createEventDetails(@RequestBody final List<Event> eventDetails, final HttpServletRequest request,
 			final HttpServletResponse response) {
 		ResponseEntity<?> responseEntity;
-		List<Event> EventList = null; 
+		List<Event> eventList = null; 
 		eventList = eventService.createEvents(eventDetails); 
 		return new ResponseEntity<List<Event>>(eventList, HttpStatus.OK);
 	}

@@ -88,7 +88,7 @@ public class SalesTransaction implements Serializable {
 		this.eventID = eventID;
 		this.eventRole = eventRole;
 		this.empID = empID;
-		this.empProjID = empProjID;
+		this.empProjId = empProjID;
 		this.status = status;
 		this.eventLocation = eventLocation;
 		this.eventTime = eventTime;

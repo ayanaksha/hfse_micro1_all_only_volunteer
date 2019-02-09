@@ -77,7 +77,6 @@ public class Event implements Serializable {
 			this.eventID = eventID;
 			this.eventRole = eventRole;
 			this.status = status;
-			this.empname = empname;
 			this.location = location;
 			this.eventTime = eventTime;
 			this.creationDate = creationDate;
