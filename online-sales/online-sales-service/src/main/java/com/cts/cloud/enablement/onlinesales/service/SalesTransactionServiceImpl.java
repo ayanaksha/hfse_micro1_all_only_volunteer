@@ -64,6 +64,14 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 		salesTransactionRepository.save(salesTransaction);
 		return salesTransactionRepository.findByEmpID(salesTransaction.getEmpID());
 	}
+	
+	@Override
+	public List<SalesTransaction> updateTransactionStatus(Long eventID) {
+		SalesTransaction salesTransaction = salesTransactionRepository.findByeventID(eventID);
+		salesTransaction.setStatus('cancelled');
+		salesTransactionRepository.save(salesTransaction);
+		return salesTransactionRepository.findByeventID(eventID);
+	}
 
 //	@Override
 //	public List<SalesTransaction> retrievePocTransactions(Long pocID) {
@@ -101,14 +109,7 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 //	}
 //
 //	
-	@Override
-	public List<SalesTransaction> updateTransactionStatus(Long eventID) {
-		SalesTransaction salesTransaction = salesTransactionRepository.findByeventID(eventID);
-		salesTransaction.setStatus('cancelled');
-		
-		salesTransactionRepository.save(salesTransaction);
-		return salesTransactionRepository.findByeventID(eventID);
-	}
+	
 
 	
 }
