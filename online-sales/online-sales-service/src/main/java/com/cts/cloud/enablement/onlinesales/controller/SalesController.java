@@ -174,7 +174,7 @@ public class SalesController {
 		ResponseEntity<?> responseEntity;
 		List<Event> eventList = null; 
 		try {eventList = eventService.createEvents(eventDetails);
-			if(requestedSalesUser == null) {
+			if(eventList == null) {
 				throw new Exception("Couldn't create event");
 		} 
 		}catch (Exception e) {
