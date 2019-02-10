@@ -38,13 +38,13 @@ public class SalesUserServiceImpl implements SalesUserService {
 		SalesUser existingUser = salesUserRepository.findByEmpID(user.getEmpid());
 		SalesUser newUser = new SalesUser();
 		if(existingUser == null) {
-			newUser.setEmpID(user.getEmpid());
+			newUser.setEmpid(user.getEmpid());
 			newUser.setPassword(user.getPassword());
-			newUser.setEmpName(user.getEmpname());
+			newUser.setEmpname(user.getEmpname());
 			newUser.setUserEmailId(user.getUserEmailId());
 			newUser.setPhone(user.getPhone());
-			newUser.setProjID(user.getProjId());
-			newUser.setProjName(user.getProjname());
+			newUser.setProjId(user.getProjId());
+			newUser.setProjname(user.getProjname());
 			newUser.setLocation(user.getLocation());
 			newUser.setRole(user.getRole());
 		}
@@ -63,10 +63,10 @@ public class SalesUserServiceImpl implements SalesUserService {
 		return existingUser;
 	}
 	
-	@Override
-	public SalesUser retrieveUserByUserEmailIdAndPassword(SalesUser user) {
-		return salesUserRepository.findByUserEmailIdAndPassword(user.getUserEmailId(), user.getPassword());
-	}
+//	@Override
+//	public SalesUser retrieveUserByUserEmailIdAndPassword(SalesUser user) {
+//		return salesUserRepository.findByUserEmailIdAndPassword(user.getUserEmailId(), user.getPassword());
+//	}
 
 	@Override
 	public List<SalesUser> retrieveEmpByProj(SalesUser requestUser) {

@@ -165,7 +165,7 @@ public class SalesController {
 			e.printStackTrace();
 			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<List<SalesTransaction>>(salesTransactionList, HttpStatus.OK);
+		return new ResponseEntity<SalesTransaction>(salesTransactionList, HttpStatus.OK);
 	}
 	
 	@PostMapping(path = "/online-sales-service/createEvent")

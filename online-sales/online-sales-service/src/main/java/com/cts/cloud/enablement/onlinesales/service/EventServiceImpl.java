@@ -39,14 +39,14 @@ public class EventServiceImpl implements EventService {
 	public Event createEvent(Event event) {
 		event.setCreationDate(new Date().toString());
 		eventRepository.save(event);
-		return eventRepository.findByeventID(event.getEventID());
+		return eventRepository.findByID(event.getEventID());
 	}
 	
 	@Override
 	public List<Event> createEvents(List<Event> eventList) {
 		event.setCreationDate(new Date().toString());
 		eventRepository.save(event);
-		return eventRepository.findByeventID(event.getEventID());
+		return eventRepository.findByID(event.getEventID());
 		
 		for(Event eachRecord : eventList) {
 		//fetch user id by invoking DB with username
@@ -54,23 +54,23 @@ public class EventServiceImpl implements EventService {
 		
 	}
 	eventRepository.saveAll(eventList);
-	return eventRepository.findByeventIDs(eventList.get(0).getEventID());
+	return eventRepository.findByIDs(eventList.get(0).getEventID());
 	}
 	
 	@Override
 	public Event updateEventStatus(Long eventID, String status) {
-		Event event = eventRepository.findByEventId(eventID); 
+		Event event = eventRepository.findById(eventID); 
 		event.setStatus(status);
 		eventRepository.save(event);
-		return eventRepository.findByeventID(eventID);
+		return eventRepository.findByID(eventID);
 	}
 	
 	@Override
 	public Event updateLivesTouched(Long eventID, Long livesTouched) {
-		Event event = eventRepository.findByEventId(eventID); 
+		Event event = eventRepository.findByID(eventID); 
 		event.setlivesTouched(livesTouched);
 		eventRepository.save(event);
-		return eventRepository.findByeventID(eventID);
+		return eventRepository.findByID(eventID);
 	}
 	
 

@@ -48,7 +48,8 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 	
 	@Override
 	public SalesTransaction createTransaction(SalesTransaction salesTransaction) throws Exception{
-		if(salesTransactionRepository.findByEmpIDAndEventID(salesTransaction.getEmpID(),salesTransaction.getEventID()).size() == 1) {
+		SalesTransaction existingEvent salesTransactionRepository.findByEmpIDAndEventID(salesTransaction.getEmpID(),salesTransaction.getEventID());
+		if(existingEvent.size() == 1) {
 			throw new Exception("Already Registered for the current event");
 		}
 		
@@ -61,7 +62,7 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 		SalesUser salesUser = salesUserRepository.findByEmpID(salesTransaction.getEmpID());
 		salesTransaction.setStatus("OPEN");
 		salesTransaction.setEmpProjID(salesUser.getProjId());
-		salesTransaction.setEmpEmailID(salesUser.getEmpEmailId());
+		salesTransaction.setEmpEmailID(salesUser.getUserEmailId());
 		salesTransactionRepository.save(salesTransaction);
 		return salesTransactionRepository.findByEmpID(salesTransaction.getEmpID());
 	}

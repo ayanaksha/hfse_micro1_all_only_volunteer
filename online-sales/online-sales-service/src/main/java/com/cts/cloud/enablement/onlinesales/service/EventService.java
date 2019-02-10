@@ -20,6 +20,6 @@ public interface EventService {
 	
 	Event updateEventStatus(Long eventID, String status);
 	
-	Event updateLivesTouched(Long eventID);
+	Event updateLivesTouched(Long eventID, Long livesTouched);
 	
 }
