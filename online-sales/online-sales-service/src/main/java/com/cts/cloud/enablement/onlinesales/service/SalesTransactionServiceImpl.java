@@ -47,11 +47,11 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 	}
 	
 	@Override
-	public SalesTransaction createTransaction(SalesTransaction salesTransaction) throws Exception{
-		SalesTransaction existingEvent salesTransactionRepository.findByEmpIDAndEventID(salesTransaction.getEmpID(),salesTransaction.getEventID());
-		if(existingEvent.size() == 1) {
-			throw new Exception("Already Registered for the current event");
-		}
+	public SalesTransaction createTransaction(SalesTransaction salesTransaction) throws Exception {
+//		SalesTransaction existingEvent salesTransactionRepository.findByEmpIDAndEventID(salesTransaction.getEmpID(),salesTransaction.getEventID());
+//		if(existingEvent.size()==1) {
+//			throw new Exception("Already Registered for the current event");
+//		}
 		
 		SalesTransaction existingTransaction = salesTransactionRepository.findByEmpIDAndEventTime(salesTransaction.getEmpID(),salesTransaction.getEventTime());
 		
