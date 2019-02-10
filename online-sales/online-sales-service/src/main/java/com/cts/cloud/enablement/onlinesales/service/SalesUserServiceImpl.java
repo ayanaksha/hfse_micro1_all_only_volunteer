@@ -20,7 +20,7 @@ public class SalesUserServiceImpl implements SalesUserService {
 
 	@Override
 	public SalesUser retrieveUserByEmpID(SalesUser user) {
-		return salesUserRepository.findByEmpID(user.getEmpID());
+		return salesUserRepository.findByEmpID(user.getEmpid());
 	}
 	
 	@Override
@@ -30,21 +30,21 @@ public class SalesUserServiceImpl implements SalesUserService {
 	
 	@Override
 	public SalesUser retrieveUserByEmpIDAndPassword(SalesUser user) {
-		return salesUserRepository.findByEmpIDAndPassword(user.getEmpID(), user.getPassword());
+		return salesUserRepository.findByEmpIDAndPassword(user.getEmpid(), user.getPassword());
 	}
 
 	@Override
 	public SalesUser createNewUser(SalesUser user) {
-		SalesUser existingUser = salesUserRepository.findByEmpID(user.getEmpID());
+		SalesUser existingUser = salesUserRepository.findByEmpID(user.getEmpid());
 		SalesUser newUser = new SalesUser();
 		if(existingUser == null) {
-			newUser.setEmpID(user.getEmpID());
+			newUser.setEmpID(user.getEmpid());
 			newUser.setPassword(user.getPassword());
-			newUser.setEmpName(user.getEmpName());
+			newUser.setEmpName(user.getEmpname());
 			newUser.setUserEmailId(user.getUserEmailId());
 			newUser.setPhone(user.getPhone());
-			newUser.setProjID(user.getProjID());
-			newUser.setProjName(user.getProjName());
+			newUser.setProjID(user.getProjId());
+			newUser.setProjName(user.getProjname());
 			newUser.setLocation(user.getLocation());
 			newUser.setRole(user.getRole());
 		}
@@ -55,7 +55,7 @@ public class SalesUserServiceImpl implements SalesUserService {
 	
 	@Override
 	public SalesUser updateUserRole(SalesUser user) {
-		SalesUser existingUser = salesUserRepository.findByEmpID(user.getEmpID());
+		SalesUser existingUser = salesUserRepository.findByEmpID(user.getEmpid());
 		
 		existingUser.setRole(user.getRole());
 		
@@ -70,7 +70,7 @@ public class SalesUserServiceImpl implements SalesUserService {
 
 	@Override
 	public List<SalesUser> retrieveEmpByProj(SalesUser requestUser) {
-		return salesUserRepository.findByProjID(requestUser.getProjID());
+		return salesUserRepository.findByProjID(requestUser.getProjId());
 	}
 	
 	

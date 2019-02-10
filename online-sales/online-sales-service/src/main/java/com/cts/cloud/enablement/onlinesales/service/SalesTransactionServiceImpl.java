@@ -52,15 +52,16 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 			throw new Exception("Already Registered for the current event");
 		}
 		
-		if(salesTransaction.getEventTime() == salesTransactionRepository.findByEmpIDAndEventTime(salesTransaction.getEmpID(),salesTransaction.getEventTime())) {
+		SalesTransaction existingTransaction = salesTransactionRepository.findByEmpIDAndEventTime(salesTransaction.getEmpID(),salesTransaction.getEventTime());
+		
+		if(existingTransaction != null) {
 			throw new Exception("Already Registered for an event on that date");
 		}
 		
 		SalesUser salesUser = salesUserRepository.findByEmpID(salesTransaction.getEmpID());
 		salesTransaction.setStatus("OPEN");
 		salesTransaction.setEmpProjID(salesUser.getProjId());
-		salesTransaction.setEmpEmailID(salesUser.getEmailId());
-		salesTransaction.setCreatedDate(new Date().toString());
+		salesTransaction.setEmpEmailID(salesUser.getEmpEmailId());
 		salesTransactionRepository.save(salesTransaction);
 		return salesTransactionRepository.findByEmpID(salesTransaction.getEmpID());
 	}
@@ -70,7 +71,7 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 		SalesTransaction salesTransaction = salesTransactionRepository.findByEventID(eventID);
 		salesTransaction.setStatus("cancelled");
 		salesTransactionRepository.save(salesTransaction);
-		return salesTransactionRepository.findByeventID(eventID);
+		return salesTransactionRepository.findByEventID(eventID);
 	}
 
 //	@Override

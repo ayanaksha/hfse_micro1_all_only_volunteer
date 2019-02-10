@@ -146,7 +146,7 @@ public class SalesController {
 	public @ResponseBody ResponseEntity<?> createTransactionDetails(@RequestBody final SalesTransaction salesTransactionDetails, final HttpServletRequest request,
 			final HttpServletResponse response) {
 		ResponseEntity<?> responseEntity;
-		List<SalesTransaction> salesTransactionList = null;
+		SalesTransaction salesTransactionList = null;
 		SalesUser requestedSalesUser = new SalesUser();
 		try {
 			requestedSalesUser.setEmpid(salesTransactionDetails.getPocID());

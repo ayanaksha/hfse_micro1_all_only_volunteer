@@ -16,8 +16,6 @@ public interface SalesUserService {
 	
 	SalesUser retrieveUserByEmpIDAndPassword(SalesUser user);
 	
-	SalesUser retrieveUserByEmpEmailIdAndPassword(SalesUser user);
-	
 	SalesUser createNewUser(SalesUser user);
 	
 	SalesUser updateUserRole(SalesUser user);
