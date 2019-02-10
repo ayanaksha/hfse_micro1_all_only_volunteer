@@ -81,14 +81,14 @@ public class SalesTransaction implements Serializable {
 	 * @param rowversion
 	 */
 	public SalesTransaction(Long id, Long eventID, String eventRole, 
-			Long empID, Long empProjID, String status, String eventLocation, String eventTime, Long pocID, 
+			Long empID, Long empProjId, String status, String eventLocation, String eventTime, Long pocID, 
 			String pocEmailId, String empEmailId) {
 		super();
 		this.id = id;
 		this.eventID = eventID;
 		this.eventRole = eventRole;
 		this.empID = empID;
-		this.empProjId = empProjID;
+		this.empProjId = empProjId;
 		this.status = status;
 		this.eventLocation = eventLocation;
 		this.eventTime = eventTime;
@@ -129,12 +129,12 @@ public class SalesTransaction implements Serializable {
 		this.empID = empID;
 	}
 
-	public Long getEmpProjID() {
+	public Long getempProjId() {
 		return empProjId;
 	}
 
 	public void setEmpProjID(Long empProjID) {
-		this.empProjID = empProjID;
+		this.empProjId = empProjId;
 	}
 	public String getStatus() {
 		return status;
