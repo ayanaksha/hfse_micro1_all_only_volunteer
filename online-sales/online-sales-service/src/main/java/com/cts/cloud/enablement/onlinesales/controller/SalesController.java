@@ -182,7 +182,6 @@ public class SalesController {
 			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		}
 		return new ResponseEntity<List<Event>>(eventList, HttpStatus.OK);
 	}
 		
