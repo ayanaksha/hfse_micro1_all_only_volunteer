@@ -173,7 +173,15 @@ public class SalesController {
 			final HttpServletResponse response) {
 		ResponseEntity<?> responseEntity;
 		List<Event> eventList = null; 
-		eventList = eventService.createEvents(eventDetails); 
+		try {eventList = eventService.createEvents(eventDetails);
+			if(requestedSalesUser == null) {
+				throw new Exception("Couldn't create event");
+		} catch (Exception e) {
+			e.printStackTrace();
+			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		}
 		return new ResponseEntity<List<Event>>(eventList, HttpStatus.OK);
 	}
 		

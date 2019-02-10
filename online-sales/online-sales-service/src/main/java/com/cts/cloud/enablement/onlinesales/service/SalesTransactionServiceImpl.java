@@ -62,7 +62,7 @@ public class SalesTransactionServiceImpl implements SalesTransactionService {
 		SalesUser salesUser = salesUserRepository.findByEmpID(salesTransaction.getEmpID());
 		salesTransaction.setStatus("OPEN");
 		salesTransaction.setEmpProjID(salesUser.getProjId());
-		salesTransaction.setEmpEmailID(salesUser.getUserEmailId());
+		salesTransaction.setEmpEmailId(salesUser.getUserEmailId());
 		salesTransactionRepository.save(salesTransaction);
 		return salesTransactionRepository.findByEmpID(salesTransaction.getEmpID());
 	}

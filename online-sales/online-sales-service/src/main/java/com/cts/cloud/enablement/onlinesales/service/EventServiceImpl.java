@@ -44,9 +44,9 @@ public class EventServiceImpl implements EventService {
 	
 	@Override
 	public List<Event> createEvents(List<Event> eventList) {
-		event.setCreationDate(new Date().toString());
-		eventRepository.save(event);
-		return eventRepository.findByID(event.getEventID());
+//		eventList.setCreationDate(new Date().toString());
+//		eventRepository.save(event);
+//		return eventRepository.findByID(event.getEventID());
 		
 		for(Event eachRecord : eventList) {
 		//fetch user id by invoking DB with username
