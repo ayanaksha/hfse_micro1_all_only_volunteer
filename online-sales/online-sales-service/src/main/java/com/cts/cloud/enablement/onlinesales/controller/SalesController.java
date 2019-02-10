@@ -176,7 +176,8 @@ public class SalesController {
 		try {eventList = eventService.createEvents(eventDetails);
 			if(requestedSalesUser == null) {
 				throw new Exception("Couldn't create event");
-		} catch (Exception e) {
+		} 
+		}catch (Exception e) {
 			e.printStackTrace();
 			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
