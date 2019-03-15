@@ -8,7 +8,7 @@ import com.cts.cloud.enablement.onlinesales.domain.SalesUser;
  * @author 547991
  *
  */
-public interface SalesUserService {
+public interface ActiveDirectoryService {
 
 	SalesUser retrieveUserByEmpID(SalesUser user);
 	

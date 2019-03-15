@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @Entity
 @Table
-public class SalesUser implements Serializable {
+public class ActiveDirectory implements Serializable {
 
 	private static final long serialVersionUID = 728806186124441033L;
 
@@ -44,22 +44,17 @@ public class SalesUser implements Serializable {
 		@Column(name = "proj_id")
 		private Long projId;
 		
-		@Column(name = "proj_name")
-		private String projname;
+		@Column(name = "buid")
+		private String buid;
 		
 		@Column(name = "role")
 		private String role;
 		
-		@Column(name = "phone")
-		private String phone;
-		
-		@Column(name = "location")
-		private String location;
 		
 		/**
 		 * Default constructor
 		 */
-		public SalesUser() {
+		public ActiveDirectory() {
 			super();
 		}
 
@@ -72,8 +67,8 @@ public class SalesUser implements Serializable {
 		 * @param phone
 		 * @param location
 		 */
-		public SalesUser(Long id, Long empid, String password, String empname, String userEmailId, Long projId, 
-				String projname, String role, String phone,String location) {
+		public ActiveDirectory(Long id, Long empid, String password, String empname, String userEmailId, Long projId, 
+				String buid, String role) {
 			super();
 			this.id = id;
 			this.empid = empid;
@@ -81,10 +76,9 @@ public class SalesUser implements Serializable {
 			this.empname = empname;
 			this.userEmailId = userEmailId;
 			this.projId = projId;
-			this.projname = projname;
+			this.buid = buid;
 			this.role = role;
-			this.phone = phone;
-			this.location = location;
+			
 		}
 
 		public Long getId() {
@@ -135,12 +129,12 @@ public class SalesUser implements Serializable {
 			this.projId = projId;
 		}
 
-		public String getProjname() {
-			return projname;
+		public String getBuid() {
+			return buid;
 		}
 
-		public void setProjname(String projname) {
-			this.projname = projname;
+		public void setBuid(String buid) {
+			this.buid = buid;
 		}
 
 		public String getRole() {
@@ -151,20 +145,5 @@ public class SalesUser implements Serializable {
 			this.role = role;
 		}
 
-		public String getPhone() {
-			return phone;
-		}
-
-		public void setPhone(String phone) {
-			this.phone = phone;
-		}
-
-		public String getLocation() {
-			return location;
-		}
-
-		public void setLocation(String location) {
-			this.location = location;
-		}
 
 }
