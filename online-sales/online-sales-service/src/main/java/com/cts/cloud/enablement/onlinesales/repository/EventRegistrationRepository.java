@@ -16,13 +16,13 @@ public interface EventRegistrationRepository extends JpaRepository<EventRegistra
 	
 //	List<SalesTransaction> findByEmpIDAndStatus(Long empID, String status);
 //	
-	SalesTransaction findByEventID(Long eventID);
+	EventRegistration findByEventID(Long eventID);
 //	
 	EventRegistration findByEmpIDAndEventDate(Long empID, String eventDate);
 //	
 //	List<SalesTransaction> findByEmpID(Long empID);
 //	
-	List<SalesTransaction> findByProjID(Long ProjID);
+	List<EventRegistration> findByProjID(Long ProjID);
 //	
 //	List<SalesTransaction> findByEmpIDIn(List<Long> userList);
 //	

@@ -2,7 +2,7 @@ package com.cts.cloud.enablement.onlinesales.service;
 
 import java.util.List;
 
-import com.cts.cloud.enablement.onlinesales.domain.SalesUser;
+import com.cts.cloud.enablement.onlinesales.domain.ActiveDirectory;
 
 /**
  * @author 547991
@@ -10,16 +10,16 @@ import com.cts.cloud.enablement.onlinesales.domain.SalesUser;
  */
 public interface ActiveDirectoryService {
 
-	SalesUser retrieveUserByEmpID(SalesUser user);
+	ActiveDirectory retrieveUserByEmpID(ActiveDirectory user);
 	
-	SalesUser retrieveUserByEmailId(SalesUser user);
+	ActiveDirectory retrieveUserByEmailId(ActiveDirectory user);
 	
-	SalesUser retrieveUserByEmpIDAndPassword(SalesUser user);
+	ActiveDirectory retrieveUserByEmpIDAndPassword(ActiveDirectory user);
 	
-	SalesUser createNewUser(SalesUser user);
+	ActiveDirectory createNewUser(ActiveDirectory user);
 	
-	SalesUser updateUserRole(SalesUser user);
+	ActiveDirectory updateUserRole(ActiveDirectory user);
 	
-	List<SalesUser> retrieveEmpByProj(SalesUser user);
+	List<ActiveDirectory> retrieveEmpByProj(ActiveDirectory user);
 	
 }
