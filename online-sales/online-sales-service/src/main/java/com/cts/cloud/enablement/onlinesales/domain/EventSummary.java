@@ -96,8 +96,8 @@ public class EventSummary implements Serializable {
 		 * @param location
 		 */
 		public EventSummary(Long eventID, String eventDate, String location, String venueAddress,
-				String council, String category, String eventName, String eventDesc, String activityType
-				String status, Long pocID, String pocName, String startTime, String endTime
+				String council, String category, String eventName, String eventDesc, String activityType,
+				String status, Long pocID, String pocName, String startTime, String endTime,
 				String volunteersReq, String boardingPoints, String dropPoints, String livesTouched) {
 			super();
 			this.eventID = eventID;
