@@ -82,7 +82,7 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
 	
 	@Override
 	public List<EventRegistration> updateEventRegistrationStatus(Long eventID) {
-		EventRegistration eventRegistration = eventRegistrationRepository.findByEventID(eventID);
+		List<EventRegistration> eventRegistration = eventRegistrationRepository.findByEventID(eventID);
 		eventRegistration.setStatus("cancelled");
 		eventRegistrationRepository.save(eventRegistration);
 		return eventRegistration;
