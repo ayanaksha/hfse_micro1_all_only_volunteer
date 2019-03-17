@@ -10,9 +10,9 @@ import com.cts.cloud.enablement.onlinesales.domain.VolunteerEnrolment;
  */
 public interface VolunteerEnrolmentService {
 
-	VolunteerEnrolment retrieveEnrolmentByEmpID(Long empID);
+	List<VolunteerEnrolment> retrieveEnrolmentByEmpID(Long empID);
 //	
-	VolunteerEnrolment retrieveEnrolmentByStatus(String Status);
+	List<VolunteerEnrolment> retrieveEnrolmentByStatus(String Status);
 //	
 //	SalesUser retrieveUserByEmpIDAndPassword(SalesUser user);
 //	
