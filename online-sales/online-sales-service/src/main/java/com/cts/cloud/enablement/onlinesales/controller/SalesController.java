@@ -42,7 +42,7 @@ public class SalesController {
 	EventSummaryService eventSummaryService;
 	
 	@Autowired
-	VolunteerRegistrationService volunteerRegistrationService;
+	VolunteerEnrolmentService volunteerEnrolmentService;
 	
 	@Autowired
 	private SecurityTokenGenerator tokenGenerator;
