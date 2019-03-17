@@ -1,7 +1,6 @@
 package com.cts.cloud.enablement.onlinesales.repository;
 
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.cts.cloud.enablement.onlinesales.domain.ActiveDirectory;
 
@@ -11,16 +10,16 @@ import com.cts.cloud.enablement.onlinesales.domain.ActiveDirectory;
  */
 public interface ActiveDirectoryRepository extends JpaRepository<ActiveDirectory, Long> {
 	
-	ActiveDirectoryRepository findByEmpID(Long empid);
+	ActiveDirectory findByEmpID(Long empid);
 	
-	ActiveDirectoryRepository findByUserEmailId(String userEmailId);
+	ActiveDirectory findByUserEmailId(String userEmailId);
 	
-	ActiveDirectoryRepository findByEmpIDAndPassword(Long EmpID, String password);
+	ActiveDirectory findByEmpIDAndPassword(Long EmpID, String password);
 	
-	ActiveDirectoryRepository findById(long id);
+	ActiveDirectory findById(long id);
 	
-	List<ActiveDirectoryRepository> findByRole(String role);
+	List<ActiveDirectory> findByRole(String role);
 	
-	List<ActiveDirectoryRepository> findByProjID(Long projID);
+	List<ActiveDirectory> findByProjID(Long projID);
 	
 }
