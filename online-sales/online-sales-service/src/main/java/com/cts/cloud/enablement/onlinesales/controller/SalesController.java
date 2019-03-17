@@ -244,7 +244,7 @@ public class SalesController {
 		} catch (Exception e) {
 			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
-		responseEntity = new ResponseEntity<EventSummary>(thisEvent, HttpStatus.OK);
+		responseEntity = new ResponseEntity<VolunteerEnrolment>(thisEvent, HttpStatus.OK);
 		return responseEntity;
 	}
 	
