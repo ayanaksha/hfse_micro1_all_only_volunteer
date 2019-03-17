@@ -58,7 +58,7 @@ public class EventRegistration implements Serializable {
 	private String eventDate;
 	
 	@Column(name = "buid")
-	private Long buid;
+	private String buid;
 	
 	@Column(name = "emp_proj_id")
 	private Long empProjId;
@@ -90,7 +90,7 @@ public class EventRegistration implements Serializable {
 	public EventRegistration(Long id, Long eventID,  
 			Long empID, String empName, String eventLocation, String beneficiaryName,
 			String councilName, String eventName, String eventDesc,
-			String eventDate, Long buid, Long empProjId, String status) {
+			String eventDate, String buid, Long empProjId, String status) {
 		super();
 		this.id = id;
 		this.eventID = eventID;
@@ -187,11 +187,11 @@ public class EventRegistration implements Serializable {
 		this.eventDate = eventDate;
 	}
 
-	public Long getBuid() {
+	public String getBuid() {
 		return buid;
 	}
 
-	public void setBuid(Long buid) {
+	public void setBuid(String buid) {
 		this.buid = buid;
 	}
 

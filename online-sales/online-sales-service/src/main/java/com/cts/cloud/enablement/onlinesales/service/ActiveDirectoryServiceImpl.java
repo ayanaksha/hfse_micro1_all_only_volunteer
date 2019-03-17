@@ -35,7 +35,7 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
 
 	@Override
 	public ActiveDirectory createNewUser(ActiveDirectory user) {
-		ActiveDirectory existingUser = ActiveDirectoryRepository.findByEmpID(user.getEmpid());
+		ActiveDirectory existingUser = activeDirectoryRepository.findByEmpID(user.getEmpid());
 		ActiveDirectory newUser = new ActiveDirectory();
 		if(existingUser == null) {
 			newUser.setEmpid(user.getEmpid());

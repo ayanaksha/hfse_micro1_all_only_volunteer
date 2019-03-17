@@ -69,7 +69,7 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
 			throw new Exception("Already Registered for an event on that date");
 		}
 		
-		EventSummary eventSummary = eventSummaryRepository.findByEventId(eventRegistration.getEventId());
+		EventSummary eventSummary = eventSummaryRepository.findByEventId(eventRegistration.getEventID());
 		ActiveDirectory activeDirectory = activeDirectoryRepository.findByEmpID(eventRegistration.getEmpID());
 		eventRegistration.setStatus("OPEN");
 		eventRegistration.setEventName(eventSummary.getEventName());
