@@ -77,7 +77,8 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
 		eventRegistration.setEventDate(eventSummary.getEventDate());
 		eventRegistration.setBuid(activeDirectory.getBuid());
 		eventRegistrationRepository.save(eventRegistration);
-		return eventRegistrationRepository.findById(eventRegistration.getId());
+//		return eventRegistrationRepository.findById(eventRegistration.getId());
+		return eventRegistration;
 	}
 	
 	@Override
