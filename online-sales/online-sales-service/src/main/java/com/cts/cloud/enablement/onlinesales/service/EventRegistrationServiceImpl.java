@@ -77,7 +77,7 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
 		eventRegistration.setEventDate(eventSummary.getEventDate());
 		eventRegistration.setBuid(activeDirectory.getBuid());
 		eventRegistrationRepository.save(eventRegistration);
-		return eventRegistrationRepository.findByEventID(eventRegistration.getEventID());
+		return eventRegistrationRepository.findById(eventRegistration.getId());
 	}
 	
 	@Override
@@ -87,7 +87,7 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
 		    eachRecord.setStatus("cancelled");
 		}
 		eventRegistrationRepository.save(eventRegistrationList);
-		return eventRegistrationList;
+		return eventRegistrationRepository.findByEventID(eventID);;
 	}
 
 //	@Override
