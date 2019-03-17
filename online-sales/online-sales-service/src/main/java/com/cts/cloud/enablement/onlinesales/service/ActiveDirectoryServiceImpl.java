@@ -16,21 +16,21 @@ import com.cts.cloud.enablement.onlinesales.repository.ActiveDirectoryRepository
 public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
 	
 	@Autowired
-	ActiveDirectoryRepository ActiveDirectoryRepository;
+	ActiveDirectoryRepository activeDirectoryRepository;
 
 	@Override
 	public ActiveDirectory retrieveUserByEmpID(ActiveDirectory user) {
-		return ActiveDirectoryRepository.findByEmpID(user.getEmpid());
+		return activeDirectoryRepository.findByEmpID(user.getEmpid());
 	}
 	
 	@Override
 	public ActiveDirectory retrieveUserByEmailId(ActiveDirectory user) {
-		return ActiveDirectoryRepository.findByUserEmailId(user.getUserEmailId());
+		return activeDirectoryRepository.findByUserEmailId(user.getUserEmailId());
 	}
 	
 	@Override
 	public ActiveDirectory retrieveUserByEmpIDAndPassword(ActiveDirectory user) {
-		return ActiveDirectoryRepository.findByEmpIDAndPassword(user.getEmpid(), user.getPassword());
+		return activeDirectoryRepository.findByEmpIDAndPassword(user.getEmpid(), user.getPassword());
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
 			newUser.setProjId(user.getProjId());
 			newUser.setRole(user.getRole());
 		}
-		ActiveDirectoryRepository.save(newUser);
+		activeDirectoryRepository.save(newUser);
 		return newUser;
 	}
 
@@ -57,14 +57,14 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
 		
 		existingUser.setRole(user.getRole());
 		
-		ActiveDirectoryRepository.save(existingUser);
+		activeDirectoryRepository.save(existingUser);
 		return existingUser;
 	}
 
 
 	@Override
 	public List<ActiveDirectory> retrieveEmpByProj(ActiveDirectory requestUser) {
-		return ActiveDirectoryRepository.findByProjID(requestUser.getProjId());
+		return activeDirectoryRepository.findByProjID(requestUser.getProjId());
 	}
 	
 	
