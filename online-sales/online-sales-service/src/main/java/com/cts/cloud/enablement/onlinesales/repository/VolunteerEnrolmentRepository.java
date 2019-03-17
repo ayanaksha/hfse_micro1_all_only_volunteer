@@ -31,9 +31,9 @@ import com.cts.cloud.enablement.onlinesales.domain.VolunteerEnrolment;
 
 public interface VolunteerEnrolmentRepository extends JpaRepository<VolunteerEnrolment, Long> {
 	
-	VolunteerEnrolment findByEmpID(Long empID);
+	List<VolunteerEnrolment> findByEmpID(Long empID);
 	
-	VolunteerEnrolment findByStatus(String Status);
+	List<VolunteerEnrolment> findByStatus(String Status);
 //	
 //	SalesUser findByUserEmailId(String userEmailId);
 //	
