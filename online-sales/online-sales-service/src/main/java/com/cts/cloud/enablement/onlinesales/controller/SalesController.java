@@ -276,7 +276,7 @@ public class SalesController {
 	 * @return
 	 */
 	@PostMapping(path = "/online-sales-service/eventsQueued")
-	public @ResponseBody ResponseEntity<?> eventsEnroledByEmp(@RequestBody final VolunteerEnrolment volEnrol, final HttpServletRequest request,
+	public @ResponseBody ResponseEntity<?> queuedEnrolledEvents(@RequestBody final VolunteerEnrolment volEnrol, final HttpServletRequest request,
 			final HttpServletResponse response) {
 		ResponseEntity<?> responseEntity;
 		List<VolunteerEnrolment> volEnrolList = null;
