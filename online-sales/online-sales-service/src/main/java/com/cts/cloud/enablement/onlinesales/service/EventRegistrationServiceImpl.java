@@ -87,7 +87,7 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
 		for(EventRegistration eachRecord : eventRegistrationList) {
 		    eachRecord.setStatus("cancelled");
 		}
-		eventRegistrationRepository.save(eventRegistrationList);
+		eventRegistrationRepository.saveAll(eventRegistrationList);
 		return eventRegistrationRepository.findByEventID(eventID);;
 	}
 
