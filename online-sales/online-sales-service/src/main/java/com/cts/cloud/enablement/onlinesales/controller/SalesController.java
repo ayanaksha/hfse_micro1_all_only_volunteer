@@ -224,6 +224,79 @@ public class SalesController {
 		responseEntity = new ResponseEntity<List<EventSummary>>(thisEvent, HttpStatus.OK);
 		return responseEntity;
 	}
+	
+	
+
+	/**
+	 * method to create a volunteer requirement
+	 * @param user
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@PostMapping(path = "/online-sales-service/volunteerEnrolment")
+	public ResponseEntity<?> createVolunteerEnrolment(@RequestBody final VolunteerEnrolment volEnrol, final HttpServletRequest request,
+			final HttpServletResponse response) {
+		ResponseEntity<?> responseEntity;
+		VolunteerEnrolment thisEvent = null;
+		try {
+			thisEvent = volunteerEnrolmentService.createNewVolunteerEnrolment(volEnrol);
+		} catch (Exception e) {
+			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		responseEntity = new ResponseEntity<EventSummary>(thisEvent, HttpStatus.OK);
+		return responseEntity;
+	}
+	
+	/**
+	 * method to retrieve volunteer enrolments for an employee
+	 * @param user
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@PostMapping(path = "/online-sales-service/eventsEnroledByEmployee")
+	public @ResponseBody ResponseEntity<?> eventsEnroledByEmp(@RequestBody final VolunteerEnrolment volEnrol, final HttpServletRequest request,
+			final HttpServletResponse response) {
+		ResponseEntity<?> responseEntity;
+		List<VolunteerEnrolment> volEnrolList = null;
+		try {
+			volEnrolList = volunteerEnrolmentService.retrieveEnrolmentByEmpID(volEnrol.getEmpID());
+		} catch (Exception e) {
+			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<VolunteerEnrolment>>(volEnrolList, HttpStatus.OK);
+	}
+	
+	/**
+	 * method to retrieve volunteer enrolments that are queued
+	 * @param user
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@PostMapping(path = "/online-sales-service/eventsQueued")
+	public @ResponseBody ResponseEntity<?> eventsEnroledByEmp(@RequestBody final VolunteerEnrolment volEnrol, final HttpServletRequest request,
+			final HttpServletResponse response) {
+		ResponseEntity<?> responseEntity;
+		List<VolunteerEnrolment> volEnrolList = null;
+		try {
+			volEnrolList = volunteerEnrolmentService.retrieveEnrolmentByStatus("Queued");
+		} catch (Exception e) {
+			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<VolunteerEnrolment>>(volEnrolList, HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * method to retrieve transaction for relationmanager from database by user details
 	 * @param user

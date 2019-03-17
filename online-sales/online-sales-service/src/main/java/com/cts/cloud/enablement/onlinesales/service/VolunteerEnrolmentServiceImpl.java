@@ -19,12 +19,12 @@ public class VolunteerEnrolmentServiceImpl implements VolunteerEnrolmentService 
 	VolunteerEnrolmentRepository volunteerEnrolmentRepository;
 
 	@Override
-	public VolunteerEnrolment retrieveUserByEmpID(Long empID) {
+	public VolunteerEnrolment retrieveEnrolmentByEmpID(Long empID) {
 		return volunteerEnrolmentRepository.findByEmpID(empID);
 	}
 	
 	@Override
-	public VolunteerEnrolment retrieveUserByStatus(String status) {
+	public VolunteerEnrolment retrieveEnrolmentByStatus(String status) {
 		return volunteerEnrolmentRepository.findByStatus(status);
 	}
 	
