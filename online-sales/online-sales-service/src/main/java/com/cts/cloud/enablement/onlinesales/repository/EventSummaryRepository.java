@@ -11,7 +11,7 @@ import com.cts.cloud.enablement.onlinesales.domain.EventSummary;
  */
 public interface EventSummaryRepository extends JpaRepository<EventSummary, Long> {
 	
-//	Event findByID(Long eventID);
+	Event findByEventId(Long eventID);
 //	
 //	List<Event> findByIDs(List<Long> eventIDList);
 //	

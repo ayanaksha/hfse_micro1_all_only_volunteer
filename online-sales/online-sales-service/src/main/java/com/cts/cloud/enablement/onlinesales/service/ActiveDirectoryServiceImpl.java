@@ -53,7 +53,7 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
 	
 	@Override
 	public ActiveDirectory updateUserRole(ActiveDirectory user) {
-		SalesUser existingUser = salesUserRepository.findByEmpID(user.getEmpid());
+		ActiveDirectory existingUser = activeDirectoryRepository.findByEmpID(user.getEmpid());
 		
 		existingUser.setRole(user.getRole());
 		

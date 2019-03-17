@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
-import com.cts.cloud.enablement.onlinesales.domain.SalesUser;
+import com.cts.cloud.enablement.onlinesales.domain.ActiveDirectory;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -15,7 +15,7 @@ public class JwtSecurityTokenGeneratorImpl implements SecurityTokenGenerator {
 	 * Generate jwt token
 	 */
 	@Override
-	public Map<String, Object> generateToken(SalesUser user) {
+	public Map<String, Object> generateToken(ActiveDirectory user) {
 		String jwtToken = "";
 		jwtToken = Jwts.builder().setSubject(user.getId().toString()).setIssuedAt(new Date())
 				.signWith(SignatureAlgorithm.HS256, "secretkey").compact();

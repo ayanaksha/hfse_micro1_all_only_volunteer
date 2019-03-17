@@ -148,7 +148,7 @@ public class SalesController {
 	 * @return
 	 */
 	@PostMapping(path = "/online-sales-service/registerForAnEvent")
-	public ResponseEntity<?> eventRegistration(@RequestBody final eventRegistration eventReg, final HttpServletRequest request,
+	public ResponseEntity<?> eventRegistration(@RequestBody final EventRegistration eventReg, final HttpServletRequest request,
 			final HttpServletResponse response) {
 		ResponseEntity<?> responseEntity;
 		EventRegistration thisEvent = null;
@@ -191,7 +191,7 @@ public class SalesController {
 	 * @return
 	 */
 	@PostMapping(path = "/online-sales-service/createEvent")
-	public ResponseEntity<?> createEvent(@RequestBody final eventSummary eventSum, final HttpServletRequest request,
+	public ResponseEntity<?> createEvent(@RequestBody final EventSummary eventSum, final HttpServletRequest request,
 			final HttpServletResponse response) {
 		ResponseEntity<?> responseEntity;
 		EventSummary thisEvent = null;
@@ -211,7 +211,7 @@ public class SalesController {
 	 * @param response
 	 * @return
 	 */
-	@PostMapping(path = "/online-sales-service/createEvent")
+	@PostMapping(path = "/online-sales-service/createEvents")
 	public ResponseEntity<?> createEvents(@RequestBody final List<EventSummary> eventSum, final HttpServletRequest request,
 			final HttpServletResponse response) {
 		ResponseEntity<?> responseEntity;
@@ -221,7 +221,7 @@ public class SalesController {
 		} catch (Exception e) {
 			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
-		responseEntity = new ResponseEntity<EventSummary>(thisEvent, HttpStatus.OK);
+		responseEntity = new ResponseEntity<List<EventSummary>>(thisEvent, HttpStatus.OK);
 		return responseEntity;
 	}
 	/**

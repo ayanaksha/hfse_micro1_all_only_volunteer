@@ -61,7 +61,7 @@ public class EventSummaryServiceImpl implements EventSummaryService {
 	public EventSummary updateEventSummary(Long eventID, EventSummary eventSummary) {
 //		Event event = eventRepository.findById(eventID); 
 //		event.setStatus(status);
-		eventRepository.save(event);
+		eventSummaryRepository.save(event);
 		return eventSummary;
 	}
 	

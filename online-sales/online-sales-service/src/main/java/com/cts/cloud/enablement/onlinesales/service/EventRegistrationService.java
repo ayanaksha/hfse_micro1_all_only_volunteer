@@ -20,7 +20,7 @@ public interface EventRegistrationService {
 //	
 //	List<SalesTransaction> retrieveEventTransactions(Long eventID);
 
-	SalesTransaction createEventRegistration(EventRegistration eventRegistration) throws Exception;
+	EventRegistration createEventRegistration(EventRegistration eventRegistration) throws Exception;
 	
 	List<EventRegistration> updateEventRegistrationStatus(Long eventID);
 	

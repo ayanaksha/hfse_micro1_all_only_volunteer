@@ -1,7 +1,7 @@
 package com.cts.cloud.enablement.onlinesales.service;
 
 import java.util.Map;
-import com.cts.cloud.enablement.onlinesales.domain.SalesUser;
+import com.cts.cloud.enablement.onlinesales.domain.ActiveDirectory;
 
 public interface SecurityTokenGenerator {
 	
@@ -10,6 +10,6 @@ public interface SecurityTokenGenerator {
 	 * @param user
 	 * @return
 	 */
-	Map<String, Object> generateToken(SalesUser user);
+	Map<String, Object> generateToken(ActiveDirectory user);
 
 }

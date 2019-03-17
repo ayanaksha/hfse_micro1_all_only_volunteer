@@ -27,6 +27,9 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
 	@Autowired
 	private transient ActiveDirectoryRepository activeDirectoryRepository;
 	
+	@Autowired
+	private transient EventSummaryRepository eventSummaryRepository;
+	
 	@Override
 	public List<EventRegistration> retrieveEventRegistrationByEmpID(Long empID) {
 		ActiveDirectory activeDirectory = activeDirectoryRepository.findByEmpID(empID);
