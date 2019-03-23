@@ -59,7 +59,7 @@ public class EventSummaryServiceImpl implements EventSummaryService {
 	
 	@Override
 	public EventSummary updateEventSummary(Long eventID, EventSummary eventSummary) {
-		EventSummary event = eventSummaryRepository.findByEventId(eventID); 
+		EventSummary event = eventSummaryRepository.findByEventID(eventID); 
 		event.setEventDate(eventSummary.getEventDate());
 		event.setEventDesc(eventSummary.getEventDesc());
 		event.setStatus(eventSummary.getStatus());
@@ -69,7 +69,7 @@ public class EventSummaryServiceImpl implements EventSummaryService {
 		event.setDropPoints(eventSummary.getDropPoints());
 		event.setLivesTouched(eventSummary.getLivesTouched());
 		eventSummaryRepository.save(event);
-		return eventSummaryRepository.findByEventId(eventID);
+		return eventSummaryRepository.findByEventID(eventID);
 	}
 	
 //	@Override

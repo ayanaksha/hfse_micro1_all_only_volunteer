@@ -32,13 +32,13 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
 	
 	@Override
 	public List<EventRegistration> retrieveEventRegistrationByEmpID(Long empID) {
-		ActiveDirectory activeDirectory = activeDirectoryRepository.findByEmpID(empID);
+		ActiveDirectory activeDirectory = activeDirectoryRepository.findByEmpid(empID);
 		return eventRegistrationRepository.findByEmpID(activeDirectory.getEmpid());
 	}
 
 	@Override
 	public List<EventRegistration> retrieveEventRegistrationByProjID(Long projID) {
-		return eventRegistrationRepository.findByProjID(projID);
+		return eventRegistrationRepository.findByEmpProjId(projID);
 	}
 	
 	@Override
@@ -69,8 +69,8 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
 			throw new Exception("Already Registered for an event on that date");
 		}
 		
-		EventSummary eventSummary = eventSummaryRepository.findByEventId(eventRegistration.getEventID());
-		ActiveDirectory activeDirectory = activeDirectoryRepository.findByEmpID(eventRegistration.getEmpID());
+		EventSummary eventSummary = eventSummaryRepository.findByEventID(eventRegistration.getEventID());
+		ActiveDirectory activeDirectory = activeDirectoryRepository.findByEmpid(eventRegistration.getEmpID());
 		eventRegistration.setStatus("OPEN");
 		eventRegistration.setEventName(eventSummary.getEventName());
 		eventRegistration.setEventDesc(eventSummary.getEventDesc());

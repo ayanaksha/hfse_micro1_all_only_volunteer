@@ -10,16 +10,16 @@ import com.cts.cloud.enablement.onlinesales.domain.ActiveDirectory;
  */
 public interface ActiveDirectoryRepository extends JpaRepository<ActiveDirectory, Long> {
 	
-	ActiveDirectory findByEmpID(Long empid);
+	ActiveDirectory findByEmpid(Long empid);
 	
 	ActiveDirectory findByUserEmailId(String userEmailId);
 	
-	ActiveDirectory findByEmpIDAndPassword(Long EmpID, String password);
+	ActiveDirectory findByEmpidAndPassword(Long EmpID, String password);
 	
 	ActiveDirectory findById(long id);
 	
 	List<ActiveDirectory> findByRole(String role);
 	
-	List<ActiveDirectory> findByProjID(Long projID);
+	List<ActiveDirectory> findByProjId(Long projID);
 	
 }

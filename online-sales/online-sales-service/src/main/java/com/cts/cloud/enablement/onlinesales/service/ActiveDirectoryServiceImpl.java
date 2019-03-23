@@ -20,7 +20,7 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
 
 	@Override
 	public ActiveDirectory retrieveUserByEmpID(ActiveDirectory user) {
-		return activeDirectoryRepository.findByEmpID(user.getEmpid());
+		return activeDirectoryRepository.findByEmpid(user.getEmpid());
 	}
 	
 	@Override
@@ -30,12 +30,12 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
 	
 	@Override
 	public ActiveDirectory retrieveUserByEmpIDAndPassword(ActiveDirectory user) {
-		return activeDirectoryRepository.findByEmpIDAndPassword(user.getEmpid(), user.getPassword());
+		return activeDirectoryRepository.findByEmpidAndPassword(user.getEmpid(), user.getPassword());
 	}
 
 	@Override
 	public ActiveDirectory createNewUser(ActiveDirectory user) {
-		ActiveDirectory existingUser = activeDirectoryRepository.findByEmpID(user.getEmpid());
+		ActiveDirectory existingUser = activeDirectoryRepository.findByEmpid(user.getEmpid());
 		ActiveDirectory newUser = new ActiveDirectory();
 		if(existingUser == null) {
 			newUser.setEmpid(user.getEmpid());
@@ -53,7 +53,7 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
 	
 	@Override
 	public ActiveDirectory updateUserRole(ActiveDirectory user) {
-		ActiveDirectory existingUser = activeDirectoryRepository.findByEmpID(user.getEmpid());
+		ActiveDirectory existingUser = activeDirectoryRepository.findByEmpid(user.getEmpid());
 		
 		existingUser.setRole(user.getRole());
 		
@@ -64,7 +64,7 @@ public class ActiveDirectoryServiceImpl implements ActiveDirectoryService {
 
 	@Override
 	public List<ActiveDirectory> retrieveEmpByProj(ActiveDirectory requestUser) {
-		return activeDirectoryRepository.findByProjID(requestUser.getProjId());
+		return activeDirectoryRepository.findByProjId(requestUser.getProjId());
 	}
 	
 	
