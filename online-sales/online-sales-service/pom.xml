@@ -45,10 +45,7 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		
-		
-		
-		
-
+				
 		<!-- SQL Server JDBC driver -->
 		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
 		<!-- <dependency>
@@ -58,6 +55,7 @@
 		</dependency> -->
 		
 		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+		
 		<dependency>
 		    <groupId>com.microsoft.sqlserver</groupId>
 		    <artifactId>mssql-jdbc</artifactId>
@@ -69,6 +67,7 @@
 		    	</exclusion>
 		    </exclusions>
 		</dependency>
+				
 		
 		<!-- Oracle JDBC driver -->
 		<!-- <dependency>
