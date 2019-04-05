@@ -1,0 +1,222 @@
+package com.cts.cloud.enablement.onlinesales2.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+
+import com.cts.cloud.enablement.onlinesales2.domain.VolunteerEnrolment;
+import com.cts.cloud.enablement.onlinesales2.service.VolunteerEnrolmentService;
+
+//import com.cts.cloud.enablement.onlinesales2.service.SecurityTokenGenerator;
+
+/**
+ * @author 547991
+ *
+ */
+@CrossOrigin
+@RestController
+@RequestMapping(path = "/api/v1")
+public class SalesController {
+
+
+	
+//	@Autowired
+	VolunteerEnrolmentService volunteerEnrolmentService;
+	
+//	@Autowired
+//	private SecurityTokenGenerator tokenGenerator;
+	
+	@GetMapping("/testApi")
+    public String testApi(){
+        return "Testing App Success";
+    }
+	
+	
+
+	/**
+	 * method to create a volunteer requirement
+	 * @param user
+	 * @param request
+	 * @param response
+	 * @return
+//	 */
+	@PostMapping(path = "/online-sales-service/volunteerEnrolment")
+	public ResponseEntity<?> createVolunteerEnrolment(@RequestBody final VolunteerEnrolment volEnrol, final HttpServletRequest request,
+			final HttpServletResponse response) {
+		ResponseEntity<?> responseEntity;
+		VolunteerEnrolment thisEvent = null;
+		try {
+			thisEvent = volunteerEnrolmentService.createNewVolunteerEnrolment(volEnrol);
+		} catch (Exception e) {
+			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		responseEntity = new ResponseEntity<VolunteerEnrolment>(thisEvent, HttpStatus.OK);
+		return responseEntity;
+	}
+	
+	/**
+	 * method to retrieve volunteer enrolments for an employee
+	 * @param user
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@PostMapping(path = "/online-sales-service/eventsEnroledByEmployee")
+	public @ResponseBody ResponseEntity<?> eventsEnroledByEmp(@RequestBody final VolunteerEnrolment volEnrol, final HttpServletRequest request,
+			final HttpServletResponse response) {
+		ResponseEntity<?> responseEntity;
+		List<VolunteerEnrolment> volEnrolList = null;
+		try {
+			volEnrolList = volunteerEnrolmentService.retrieveEnrolmentByEmpID(volEnrol.getEmpID());
+		} catch (Exception e) {
+			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<VolunteerEnrolment>>(volEnrolList, HttpStatus.OK);
+	}
+	
+	/**
+	 * method to retrieve volunteer enrolments that are queued
+	 * @param user
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@PostMapping(path = "/online-sales-service/eventsQueued")
+	public @ResponseBody ResponseEntity<?> queuedEnrolledEvents(@RequestBody final VolunteerEnrolment volEnrol, final HttpServletRequest request,
+			final HttpServletResponse response) {
+		ResponseEntity<?> responseEntity;
+		List<VolunteerEnrolment> volEnrolList = null;
+		try {
+			volEnrolList = volunteerEnrolmentService.retrieveEnrolmentByStatus("Queued");
+		} catch (Exception e) {
+			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<VolunteerEnrolment>>(volEnrolList, HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * method to retrieve transaction for relationmanager from database by user details
+	 * @param user
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+//	@PostMapping(path = "/online-sales-service/retrievePOCTransactions")
+//	public @ResponseBody ResponseEntity<?> retrievePOCTransactionDetails(@RequestBody final ActiveDirectory user, final HttpServletRequest request,
+//			final HttpServletResponse response) {
+//		ResponseEntity<?> responseEntity;
+//		List<EventSummaryRegistration> salesPOCTransactionList = null;
+//		try {
+//			salesPOCTransactionList = EventSummaryRegistrationService.retrievePocTransactions(user.getId());
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+//		}
+//		return new ResponseEntity<List<EventSummaryRegistration>>(salesPOCTransactionList, HttpStatus.OK);
+//	}
+//	
+//	/**
+//	 * method to create a transaction
+//	 * @param EventSummaryRegistrationDetails
+//	 * @param request
+//	 * @param response
+//	 * @return
+//	 */
+//	@PostMapping(path = "/online-sales-service/submitTransaction")
+//	public @ResponseBody ResponseEntity<?> createTransactionDetails(@RequestBody final EventSummaryRegistration EventSummaryRegistrationDetails, final HttpServletRequest request,
+//			final HttpServletResponse response) {
+//		ResponseEntity<?> responseEntity;
+//		EventSummaryRegistration EventSummaryRegistrationList = null;
+//		ActiveDirectory requestedActiveDirectory = new ActiveDirectory();
+//		try {
+//			requestedActiveDirectory.setEmpid(EventSummaryRegistrationDetails.getPocID());
+//			requestedActiveDirectory = ActiveDirectoryService.retrieveUserByEmpID(requestedActiveDirectory);
+//			if(requestedActiveDirectory == null) {
+//				throw new Exception("Couldn't find poc");
+//			}
+//
+////			Optional<ActiveDirectory> relationManager = ActiveDirectoryService.retrieveRMByUser(requestedActiveDirectory).stream().findFirst();
+////			relationManager.orElseThrow(() -> new Exception("Couldn't find RM with user email id"));
+//			
+////			EventSummaryRegistrationDetails.setRequestedBy(requestedActiveDirectory.getUserEmailId());
+////			EventSummaryRegistrationDetails.setRmEmailId(relationManager.get().getUserEmailId());
+//			EventSummaryRegistrationList = EventSummaryRegistrationService.createTransaction(EventSummaryRegistrationDetails);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//		return new ResponseEntity<EventSummaryRegistration>(EventSummaryRegistrationList, HttpStatus.OK);
+//	}
+//	
+//	@PostMapping(path = "/online-sales-service/createEventSummary")
+//	public @ResponseBody ResponseEntity<?> createEventSummaryDetails(@RequestBody final List<EventSummary> EventSummaryDetails, final HttpServletRequest request,
+//			final HttpServletResponse response) {
+//		ResponseEntity<?> responseEntity;
+//		List<EventSummary> EventSummaryList = null; 
+//		try {EventSummaryList = EventSummaryService.createEventSummarys(EventSummaryDetails);
+//			if(EventSummaryList == null) {
+//				throw new Exception("Couldn't create EventSummary");
+//		} 
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//			responseEntity = new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//
+//		return new ResponseEntity<List<EventSummary>>(EventSummaryList, HttpStatus.OK);
+//	}
+//		
+//	/**
+//	 * method to save approval of a transaction
+//	 * @param EventSummaryRegistrationDetails
+//	 * @param request
+//	 * @param response
+//	 * @return
+//	 */
+//	@PostMapping(path = "/online-sales-service/submitTransactionApproval")
+//	public @ResponseBody ResponseEntity<?> submitTransactionApproval(@RequestBody final List<EventSummaryRegistration> EventSummaryRegistrationDetails, final HttpServletRequest request,
+//			final HttpServletResponse response) {
+//		ResponseEntity<?> responseEntity;
+//		List<EventSummaryRegistration> EventSummaryRegistrationList = null; 
+//		try {
+//			EventSummaryRegistrationList = EventSummaryRegistrationService.updateTransaction(EventSummaryRegistrationDetails);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} 
+//		return new ResponseEntity<List<EventSummaryRegistration>>(EventSummaryRegistrationList, HttpStatus.OK);
+//	}
+//	
+//	/**
+//	 * method to submit payment for a transaction
+//	 * @param EventSummaryRegistrationDetails
+//	 * @param request
+//	 * @param response
+//	 * @return
+//	 */
+//	@PostMapping(path = "/online-sales-service/submitPaidTransaction")
+//	public @ResponseBody ResponseEntity<?> submitPaidTransaction(@RequestBody final EventSummaryRegistration EventSummaryRegistrationDetails, final HttpServletRequest request,
+//			final HttpServletResponse response) {
+//		ResponseEntity<?> responseEntity;
+//		List<EventSummaryRegistration> EventSummaryRegistrationList = null; 
+//		EventSummaryRegistrationList = EventSummaryRegistrationService.updateTransaction(EventSummaryRegistrationDetails); 
+//		return new ResponseEntity<List<EventSummaryRegistration>>(EventSummaryRegistrationList, HttpStatus.OK);
+//	}
+}
